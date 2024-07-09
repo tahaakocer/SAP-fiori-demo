@@ -89,7 +89,7 @@
         "async": true,
         "viewPath": "com.solvia.demo.view",
         "controlAggregation": "pages",
-        "controlId": "app",
+        "controlId": "idApp",
         "clearControlAggregation": false
       },
       "routes": [
@@ -115,7 +115,7 @@
       "viewName": "com.solvia.demo.view.App",
       "type": "XML",
       "async": true,
-      "id": "App"
+      "id": "idApp"
     }
   }
 }

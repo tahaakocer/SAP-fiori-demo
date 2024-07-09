@@ -5,9 +5,13 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "com/solvia/demo/model/models"
+        "com/solvia/demo/model/models",
+	"sap/ui/model/json/JSONModel"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent,
+	Device,
+	models,
+	JSONModel) {
         "use strict";
 
         return UIComponent.extend("com.solvia.demo.Component", {
@@ -29,6 +33,12 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                const oData = {
+                    students: []
+                }
+                const oModel = new JSONModel(oData);
+                this.setModel(oModel,"studentModel");
             }
         });
     }

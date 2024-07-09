@@ -1,7 +1,80 @@
 <mvc:View
+    controllerName="com.solvia.demo.controller.Form"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
 >
-    <Text text="FORMMM" />
+    <Text text="Form" />
+    <f:Form editable="true">
+        <f:title>
+            <core:Title text="Student Register" />
+        </f:title>
+        <f:layout>
+            <f:ResponsiveGridLayout
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                columnsXL="1"
+                columnsL="1"
+                singleContainerFullSize="false"
+            />
+        </f:layout>
+        <f:formContainers>
+            <f:FormContainer>
+                <f:formElements>
+                    <f:FormElement label="Name">
+                        <f:fields>
+                            <Input id="idNameInput" value="{name}" />
+                        </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="Surname">
+                        <f:fields>
+                            <Input id="idSurnameInput" value="{surname}" />
+                        </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="Lesson">
+                        <f:fields>
+                            <Select id="idLessonSelect" selectedKey="{lesson}">
+                                <items>
+                                    <core:Item
+                                        text="PROGRAMMING"
+                                        key="01"
+                                    />
+                                    <core:Item
+                                        text="MATH"
+                                        key="02"
+                                    />
+                                    <core:Item
+                                        text="DATA STRUCTURES AND ALGORITHMS"
+                                        key="03"
+                                    />
+
+                                    <core:Item
+                                        text="STATISTICS"
+                                        key="04"
+                                    />
+                                </items>
+                            </Select>
+                        </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="Point">
+                        <f:fields>
+                            <Input id="idPointInput" value="{point}" />
+                        </f:fields>
+                    </f:FormElement>
+                    <f:FormElement label="">
+                        <f:fields>
+                            <Button type="Success" class="saveButton" text="Save" press=".onSaveButtonPress"></Button>
+                        </f:fields>
+                    </f:FormElement>
+                </f:formElements>
+            </f:FormContainer>
+        </f:formContainers>
+    </f:Form>
 </mvc:View>

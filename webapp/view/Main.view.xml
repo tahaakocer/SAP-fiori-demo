@@ -1,0 +1,33 @@
+<mvc:View
+    controllerName="com.solvia.demo.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="idPage"
+        title="{i18n>title}"
+    >
+        <content>
+            <IconTabBar
+                expanded="{device>/isNoPhone}"
+                class="sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter
+                        text="Table"
+                        key="table"
+                    >
+                        <mvc:View type="XML" viewName="com.solvia.demo.view.Table" />
+                    </IconTabFilter>
+                    <IconTabFilter
+                        text="Form"
+                        key="form"
+                    >
+                        <mvc:View type="XML" viewName="com.solvia.demo.view.Form" />
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>

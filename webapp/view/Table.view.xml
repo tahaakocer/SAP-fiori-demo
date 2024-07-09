@@ -33,6 +33,7 @@
                     tooltip="Update Selection"
                     text="Update Selected"
                     type="Emphasized"
+                    press=".onUpdateSelectedButtonPress"
                 />
 
                 <m:Button

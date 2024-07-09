@@ -26,7 +26,7 @@ sap.ui.define([
 
             var sName = oView.byId("idNameInput").getValue();
             var sSurname = oView.byId("idSurnameInput").getValue();
-            var sLesson = parseInt(oView.byId("idLessonSelect").getSelectedKey(), 10);
+            var sLesson = oView.byId("idLessonSelect").getSelectedKey();
 
             var sPoint = parseInt(oView.byId("idPointInput").getValue(), 10);
 

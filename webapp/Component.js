@@ -35,14 +35,15 @@ sap.ui.define([
                 this.setModel(models.createDeviceModel(), "device");
 
                 const oData = {
-                    students: []
+                    students: [],
+                    selections: []
                 }
                 const oModel = new JSONModel(oData);
                 oData.students.push({
                     id: 0,
                     name: "Bilge",
                     surname: "Erdem",
-                    lesson: 2,
+                    lesson: "1",
                     point: 58,
                     approval: true
                 });

@@ -1,0 +1,92 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Dialog
+        id="idStudentEditDialog"
+        title="Edit Student"
+        draggable="true"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+    >
+        <content>
+            <VBox>
+                <Label text="Name" />
+                <Input
+                    id="idNameInput"
+                    value="{studentModel>name}"
+                />
+                <Label text="Surname" />
+                <Input
+                    id="idSurnameInput"
+                    value="{studentModel>surname}"
+                />
+                <Label text="Lesson" />
+                <Select
+                    id="idLessonSelect"
+                    selectedKey="{studentModel>lesson}"
+                >
+                    <items>
+                        <c:Item
+                            text="PROGRAMMING"
+                            key="1"
+                        />
+                        <c:Item
+                            text="MATH"
+                            key="2"
+                        />
+                        <c:Item
+                            text="DATA STRUCTURES AND ALGORITHMS"
+                            key="3"
+                        />
+
+                        <c:Item
+                            text="STATISTICS"
+                            key="4"
+                        />
+                    </items>
+                </Select>
+
+                <Label text="Point" />
+                <Input
+                    id="idPointInput"
+                    value="{studentModel>point}"
+                    type="Number"
+                />
+                <Label text="Approval" />
+                <Select
+                    id="idApprovalSelect"
+                    selectedKey="{studentModel>approval}"
+                >
+                    <items>
+                        <c:Item
+                            text="Accept"
+                            key="true"
+                        />
+                        <c:Item
+                            text="Pending"
+                            key="null"
+                        />
+                        <c:Item
+                            text="Reject"
+                            key="false"
+                        />
+
+                    </items>
+                </Select>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button
+                text="Save"
+                type="Success"
+                press=".onSaveButtonPress"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                press=".onCancelButtonPress"
+            />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

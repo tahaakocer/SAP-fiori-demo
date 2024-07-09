@@ -14,11 +14,11 @@ sap.ui.define([
          * @override
          */
         onInit: function () {
-            this._intId = 0;
+            this._intId = 1;
         },
-        
+
         onSaveButtonPress: function (oEvent) {
-          
+
             var oView = this.getView();
             //BAŞKA YOLU VAR MI SOR
             var oModel = oView.getModel("studentModel");
@@ -26,8 +26,9 @@ sap.ui.define([
 
             var sName = oView.byId("idNameInput").getValue();
             var sSurname = oView.byId("idSurnameInput").getValue();
-            var sLesson = oView.byId("idLessonSelect").getSelectedKey();
-            var sPoint = oView.byId("idPointInput").getValue();
+            var sLesson = parseInt(oView.byId("idLessonSelect").getSelectedKey(), 10);
+
+            var sPoint = parseInt(oView.byId("idPointInput").getValue(), 10);
 
             oData.students.push({
                 id: this._intId++,
@@ -37,10 +38,10 @@ sap.ui.define([
                 point: sPoint,
                 approval: null
             });
-            oModel.setData(oData,"studentData")
+            oModel.setData(oData, "studentData")
 
             MessageToast.show("Veriler eklendi");
-        
+
             console.log(oModel)
 
         },

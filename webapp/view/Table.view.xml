@@ -1,7 +1,104 @@
 <mvc:View
+    controllerName="com.solvia.demo.controller.Table"
+    xmlns="sap.ui.table"
     xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:m="sap.m"
+    height="100%"
 >
-    <Text text="TABLEEEE" />
+    <Table
+        id="idTable"
+        rows="{studentModel>/students}"
+        ariaLabelledBy="title"
+    >
+        <extension>
+            <m:OverflowToolbar style="Clear">
+                <m:Title text="Students" />
+                <m:ToolbarSpacer />
+                <m:Button
+                    icon="sap-icon://user-settings"
+                    tooltip="Update Selection"
+                />
+                <m:Button
+                    icon="sap-icon://save"
+                    tooltip="Save"
+                />
+                <m:Button
+                    icon="sap-icon://decline"
+                    tooltip="Clear Selection"
+                />
+                <m:Switch
+                    state="true"
+                    customTextOn="On"
+                    customTextOff="Off"
+                    tooltip="Enable Select All Items"
+                />
+            </m:OverflowToolbar>
+        </extension>
+
+        <columns>
+            <Column width="11rem">
+                <m:Label text="Student Id" />
+                <template>
+                    <m:Label text="{studentModel>id}" />
+                </template>
+            </Column>
+
+            <Column width="11rem">
+                <m:Label text="Name" />
+                <template>
+                    <m:Text
+                        text="{studentModel>name}"
+                        wrapping="false"
+                    />
+                </template>
+            </Column>
+            <Column width="11rem">
+                <m:Label text="Surname" />
+                <template>
+                    <m:Label text="{studentModel>surname}" />
+                </template>
+            </Column>
+            <Column width="12rem">
+                <m:Label text="Lesson" />
+                <template>
+                    <m:Label
+                        text="{path: 'studentModel>lesson',
+                        formatter: '.formatLesson'}"
+                    />
+                </template>
+            </Column>
+            <Column width="11rem">
+                <m:Label text="Point" />
+                <template>
+                    <u:Currency value="{studentModel>point}" />
+                </template>
+            </Column>
+            <Column width="11.8rem">
+                <m:Label text="Details" />
+                <template>
+                    <m:Button
+                        type="Neutral"
+                        class="showDetailsButton"
+                        text="Show Details"
+                    />
+                </template>
+            </Column>
+            <Column
+                width="6rem"
+                hAlign="Center"
+            >
+                <m:Label text="Status" />
+                <template>
+                    <c:Icon
+                        src="{
+                            path: 'studentModel>status',
+                            formatter: '.formatStatusIcon'
+                        }"
+                    />
+                </template>
+            </Column>
+        </columns>
+    </Table>
 </mvc:View>

@@ -69,7 +69,7 @@
           "bundleName": "com.solvia.demo.i18n.i18n"
         }
       },
-      "": {
+      "myOdata": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {}

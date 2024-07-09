@@ -30,34 +30,43 @@
                 <f:formElements>
                     <f:FormElement label="Name">
                         <f:fields>
-                            <Input id="idNameInput" value="{name}" />
+                            <Input
+                                id="idNameInput"
+                                value="{name}"
+                            />
                         </f:fields>
                     </f:FormElement>
                     <f:FormElement label="Surname">
                         <f:fields>
-                            <Input id="idSurnameInput" value="{surname}" />
+                            <Input
+                                id="idSurnameInput"
+                                value="{surname}"
+                            />
                         </f:fields>
                     </f:FormElement>
                     <f:FormElement label="Lesson">
                         <f:fields>
-                            <Select id="idLessonSelect" selectedKey="{lesson}">
+                            <Select
+                                id="idLessonSelect"
+                                selectedKey="{lesson}"
+                            >
                                 <items>
                                     <core:Item
                                         text="PROGRAMMING"
-                                        key="01"
+                                        key="1"
                                     />
                                     <core:Item
                                         text="MATH"
-                                        key="02"
+                                        key="2"
                                     />
                                     <core:Item
                                         text="DATA STRUCTURES AND ALGORITHMS"
-                                        key="03"
+                                        key="3"
                                     />
 
                                     <core:Item
                                         text="STATISTICS"
-                                        key="04"
+                                        key="4"
                                     />
                                 </items>
                             </Select>
@@ -65,12 +74,20 @@
                     </f:FormElement>
                     <f:FormElement label="Point">
                         <f:fields>
-                            <Input id="idPointInput" value="{point}" />
+                            <Input
+                                id="idPointInput"
+                                value="{point}"
+                            />
                         </f:fields>
                     </f:FormElement>
                     <f:FormElement label="">
                         <f:fields>
-                            <Button type="Success" class="saveButton" text="Save" press=".onSaveButtonPress"></Button>
+                            <Button
+                                type="Success"
+                                class="saveButton"
+                                text="Save"
+                                press=".onSaveButtonPress"
+                            />
                         </f:fields>
                     </f:FormElement>
                 </f:formElements>

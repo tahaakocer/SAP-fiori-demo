@@ -17,14 +17,22 @@
                     <IconTabFilter
                         text="Table"
                         key="table"
+                        icon="sap-icon://multi-select"
                     >
-                        <mvc:View type="XML" viewName="com.solvia.demo.view.Table" />
+                        <mvc:View
+                            type="XML"
+                            viewName="com.solvia.demo.view.Table"
+                        />
                     </IconTabFilter>
                     <IconTabFilter
                         text="Form"
                         key="form"
+                        icon="sap-icon://add-employee"
                     >
-                        <mvc:View type="XML" viewName="com.solvia.demo.view.Form" />
+                        <mvc:View
+                            type="XML"
+                            viewName="com.solvia.demo.view.Form"
+                        />
                     </IconTabFilter>
                 </items>
             </IconTabBar>

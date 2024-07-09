@@ -38,7 +38,16 @@ sap.ui.define([
                     students: []
                 }
                 const oModel = new JSONModel(oData);
+                oData.students.push({
+                    id: 0,
+                    name: "Bilge",
+                    surname: "Erdem",
+                    lesson: 2,
+                    point: 58,
+                    approval: true
+                });
                 this.setModel(oModel,"studentModel");
+                console.log(oData)
             }
         });
     }

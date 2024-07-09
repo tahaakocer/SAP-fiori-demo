@@ -44,6 +44,6 @@ sap.ui.define([
 
             console.log(oModel)
 
-        },
+        }
     });
 });

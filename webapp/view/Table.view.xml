@@ -17,22 +17,31 @@
                 <m:Title text="Students" />
                 <m:ToolbarSpacer />
                 <m:Button
-                    icon="sap-icon://user-settings"
-                    tooltip="Update Selection"
+                    icon="sap-icon://decline"
+                    tooltip="Clear Selection"
+                    press=".onButtonClearPress"
+        
                 />
                 <m:Button
                     icon="sap-icon://save"
                     tooltip="Save"
+                    text="Save"
+                    type="Success"
                 />
                 <m:Button
-                    icon="sap-icon://decline"
-                    tooltip="Clear Selection"
+                    icon="sap-icon://user-settings"
+                    tooltip="Update Selection"
+                    text="Update Selected"
+                    type="Emphasized"
                 />
-                <m:Switch
-                    state="true"
-                    customTextOn="On"
-                    customTextOff="Off"
-                    tooltip="Enable Select All Items"
+
+                <m:Button
+                    icon="sap-icon://delete"
+                    tooltip="Delete Selected Student"
+                    press=".onDeleteSelectedButtonPress"
+                    type="Negative"
+                    text="Delete Selected"
+
                 />
             </m:OverflowToolbar>
         </extension>

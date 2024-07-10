@@ -15,16 +15,6 @@
             >
                 <items>
                     <IconTabFilter
-                        text="Table"
-                        key="table"
-                        icon="sap-icon://multi-select"
-                    >
-                        <mvc:View
-                            type="XML"
-                            viewName="com.solvia.demo.view.Table"
-                        />
-                    </IconTabFilter>
-                    <IconTabFilter
                         text="Form"
                         key="form"
                         icon="sap-icon://add-employee"
@@ -32,6 +22,16 @@
                         <mvc:View
                             type="XML"
                             viewName="com.solvia.demo.view.Form"
+                        />
+                    </IconTabFilter>
+                    <IconTabFilter
+                        text="Table"
+                        key="table"
+                        icon="sap-icon://multi-select"
+                    >
+                        <mvc:View
+                            type="XML"
+                            viewName="com.solvia.demo.view.Table"
                         />
                     </IconTabFilter>
                 </items>

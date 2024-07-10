@@ -11,6 +11,7 @@
         id="idTable"
         rows="{studentModel>/students}"
         ariaLabelledBy="title"
+        
     >
         <extension>
             <m:OverflowToolbar style="Clear">
@@ -90,8 +91,8 @@
                 <template>
                     <m:Button
                         type="Neutral"
-                        class="showDetailsButton"
                         text="Show Details"
+                        press=".onShowDetailsButtonPress"
                     />
                 </template>
             </Column>

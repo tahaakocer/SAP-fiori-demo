@@ -13,6 +13,7 @@ sap.ui.define([
          */
         onInit: function () {
 
+
         },
         formatStatusIcon: function (sStatus) {
             if (sStatus == null) {
@@ -114,7 +115,7 @@ sap.ui.define([
             var oModel = oView.getModel("studentModel");
 
             var oData = oModel.getData();
-            oModel.updateBindings(true); 
+            oModel.updateBindings(true);
 
             this._oDialog.close();
 
@@ -125,6 +126,11 @@ sap.ui.define([
         onCancelButtonPress: function (oEvent) {
             this._oDialog.close();
             console.log(this.getView().getModel("studentModel"));
+        },
+        onShowDetailsButtonPress: function (oEvent) {
+
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("detail");
         }
 
     });

@@ -7,6 +7,6 @@
     busyIndicatorDelay="0"
 >
     <Page title="Detail Page">
-        <Label text="" />
+    
     </Page>
 </mvc:View>

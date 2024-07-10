@@ -13,30 +13,29 @@ sap.ui.define([
          */
         onInit: function () {
 
-
         },
         formatStatusIcon: function (sStatus) {
-            if (sStatus == null) {
+            if (sStatus == "PENDING") {
                 return "sap-icon://pending";
-            } else if (sStatus == true) {
+            } else if (sStatus == "APPROVE") {
                 return "sap-icon://accept";
-            } else {
+            } else if(sStatus == "REJECT") {
                 return "sap-icon://decline";
             }
         },
 
         formatLesson: function (sLesson) {
             switch (sLesson) {
-                case "1":
+                case "01":
                     return "PROGRAMMING";
                     break;
-                case "2":
+                case "02":
                     return "MATH"
                     break;
-                case "3":
+                case "03":
                     return "DATA STRUCTURES AND ALGORITHMS"
                     break;
-                case "4":
+                case "04":
                     return "STATISTICS"
                     break;
 

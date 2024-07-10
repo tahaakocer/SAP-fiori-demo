@@ -3,15 +3,15 @@
  */
 
 sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "com/solvia/demo/model/models",
-	"sap/ui/model/json/JSONModel"
-    ],
+    "sap/ui/core/UIComponent",
+    "sap/ui/Device",
+    "com/solvia/demo/model/models",
+    "sap/ui/model/json/JSONModel"
+],
     function (UIComponent,
-	Device,
-	models,
-	JSONModel) {
+        Device,
+        models,
+        JSONModel) {
         "use strict";
 
         return UIComponent.extend("com.solvia.demo.Component", {
@@ -34,20 +34,23 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
 
-                const oData = {
-                    students: []
-                }
-                const oModel = new JSONModel(oData);
-                oData.students.push({
-                    id: 0,
-                    name: "Bilge",
-                    surname: "Erdem",
-                    lesson: "1",
-                    point: 58,
-                    approval: true
-                });
-                this.setModel(oModel,"studentModel");
-                console.log(oData)
+                // const oData = {
+                //     students: []
+                // }
+                // const oModel = new JSONModel(oData);
+                // oData.students.push({
+                //     id: 0,
+                //     name: "Bilge",
+                //     surname: "Erdem",
+                //     lesson: "1",
+                //     point: 58,
+                //     approval: true
+                // });
+                // this.setModel(oModel, "studentModel");
+                // console.log(oData)
+
+                var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZTK_TUTORIAL_SERVICE_SRV/");
+                this.setModel(oModel);
             }
         });
     }

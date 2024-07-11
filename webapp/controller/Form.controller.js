@@ -2,19 +2,21 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/m/BusyIndicator",
-    "com/solvia/demo/utils/Helper"
+    "com/solvia/demo/utils/Helper",
+    "sap/ui/core/ValueState"
 
 
 ], function (
     Controller,
-	MessageToast,
-	BusyIndicator,
-	Helper
+    MessageToast,
+    BusyIndicator,
+    Helper,
+    ValueState
 ) {
     "use strict";
 
     return Controller.extend("com.solvia.demo.controller.Form", {
-      
+
         /**
          * @override
          */
@@ -37,13 +39,44 @@ sap.ui.define([
         },
 
         onSaveButtonPress: function (oEvent) {
-
             var oView = this.getView();
+            var iName = oView.byId("idNameInput");
+            var iSurname = oView.byId("idSurnameInput");
+            var iLesson = oView.byId("idGetAllDomainsSelect");
+            var iPoint = oView.byId("idPointInput");
 
-            var sName = oView.byId("idNameInput").getValue();
-            var sSurname = oView.byId("idSurnameInput").getValue();
-            var sLesson = oView.byId("idGetAllDomainsSelect").getSelectedKey();
-            var sPoint = parseInt(oView.byId("idPointInput").getValue(), 10);
+            var sName = iName.getValue();
+            var sSurname = iSurname.getValue();
+            var sLesson = iLesson.getSelectedKey();
+            var sPoint = parseInt(iPoint.getValue(), 10);
+
+            if (sName === null || sName === "") {
+                iName.setValueState(ValueState.Error);
+                iName.setValueStateText("Bu alan boş bırakılamaz!");
+            } else {
+                iName.setValueState(ValueState.None);
+            }
+
+            if (sSurname === null || sSurname === "") {
+                iSurname.setValueState(ValueState.Error);
+                iSurname.setValueStateText("Bu alan boş bırakılamaz!");
+            } else {
+                iSurname.setValueState(ValueState.None);
+            }
+
+            if (sLesson === null || sLesson === "") {
+                iLesson.setValueState(ValueState.Error);
+                iLesson.setValueStateText("Bu alan boş bırakılamaz!");
+            } else {
+                iLesson.setValueState(ValueState.None);
+            }
+
+            if (isNaN(sPoint) || sPoint === null || sPoint === "") {
+                iPoint.setValueState(ValueState.Error);
+                iPoint.setValueStateText("Bu alan boş bırakılamaz!");
+            } else {
+                iPoint.setValueState(ValueState.None);
+            }
 
             var oAddEmpData = {
                 LessonId: sLesson,
@@ -59,8 +92,8 @@ sap.ui.define([
                     MessageToast.show("Öğrenci başarıyla eklendi.");
                 },
                 error: function (data) {
-                    MessageToast.show("Öğrenci eklenemedi: ", data);
-                    console.error("öğrenci eklenemedi!" + data);
+                    MessageToast.show("Öğrenci eklenemedi!");
+                    console.error("öğrenci eklenemedi!");
                 }
             });
             Helper.refreshTable(this.getOwnerComponent());

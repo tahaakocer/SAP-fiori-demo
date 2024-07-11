@@ -32,6 +32,7 @@
                         <f:fields>
                             <Input
                                 id="idNameInput"
+                                required="true"
                                 value="{name}"
                             />
                         </f:fields>
@@ -40,6 +41,7 @@
                         <f:fields>
                             <Input
                                 id="idSurnameInput"
+                                required="true"
                                 value="{surname}"
                             />
                         </f:fields>
@@ -64,6 +66,7 @@
                     <f:FormElement label="Point">
                         <f:fields>
                             <Input
+                                required="true"
                                 id="idPointInput"
                                 value="{point}"
                             />

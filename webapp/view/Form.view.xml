@@ -47,7 +47,7 @@
                     <f:FormElement label="Lesson">
                         <f:fields>
                             <Select
-                                id="idLessonSelect"
+                                id="idGetAllDomainsSelect"
                                 selectedKey="{lesson}"
                                 items="{
                                     path: 'globalModel>/getAllDomains',

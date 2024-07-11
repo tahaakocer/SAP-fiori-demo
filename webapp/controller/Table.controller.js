@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/m/BusyIndicator"
+    "sap/ui/core/BusyIndicator"
 ], function (
     Controller,
 	MessageToast,
@@ -18,13 +18,17 @@ sap.ui.define([
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
             var globalModel = this.getOwnerComponent().getModel("globalModel");
 
+            BusyIndicator.show();
             oDataModel.read("/studentSet", {
                 success: function (oData) {
+                    BusyIndicator.hide();
                     globalModel.setProperty("/getAllStudents", oData.results);
                     console.log(oData.results)
                 },
                 error: function (oError) {
+                    BusyIndicator.hide();
                     console.error("students data okunamadi");
+                    MessageToast.show("students data okunamadi");
                 }
             })
 

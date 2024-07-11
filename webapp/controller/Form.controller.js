@@ -2,12 +2,12 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/m/BusyIndicator"
-    
+
 
 ], function (
     Controller,
-	MessageToast,
-	BusyIndicator
+    MessageToast,
+    BusyIndicator
 ) {
     "use strict";
 
@@ -38,26 +38,30 @@ sap.ui.define([
         onSaveButtonPress: function (oEvent) {
 
             var oView = this.getView();
-            //BAŞKA YOLU VAR MI SOR
 
             var sName = oView.byId("idNameInput").getValue();
             var sSurname = oView.byId("idSurnameInput").getValue();
-            var sLesson = oView.byId("idLessonSelect").getSelectedKey();
+            var sLesson = oView.byId("idGetAllDomainsSelect").getSelectedKey();
             var sPoint = parseInt(oView.byId("idPointInput").getValue(), 10);
 
-            oData.students.push({
-                id: this._intId++,
-                name: sName,
-                surname: sSurname,
-                lesson: sLesson,
-                point: sPoint,
-                approval: null
+            var oAddEmpData = {
+                LessonId: sLesson,
+                Name: sName,
+                Surname: sSurname,
+                Point: sPoint,
+                Approval: "PENDING"
+            };
+
+            this.getOwnerComponent().getModel("myOdata").create("/studentSet", oAddEmpData, {
+                method: "POST",
+                success: function (data) {
+                    MessageToast.show("Öğrenci başarıyla eklendi.");
+                },
+                error: function (data) {
+                    MessageToast.show("Öğrenci eklenemedi: ", data);
+                    console.error("öğrenci eklenemedi!" + data);
+                }
             });
-            oModel.setData(oData, "studentData")
-
-            MessageToast.show("Veriler eklendi");
-
-            console.log(oModel)
 
         }
     });

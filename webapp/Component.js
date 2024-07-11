@@ -27,30 +27,18 @@ sap.ui.define([
             init: function () {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
-
                 // enable routing
                 this.getRouter().initialize();
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
 
-                // const oData = {
-                //     students: []
-                // }
-                // const oModel = new JSONModel(oData);
-                // oData.students.push({
-                //     id: 0,
-                //     name: "Bilge",
-                //     surname: "Erdem",
-                //     lesson: "1",
-                //     point: 58,
-                //     approval: true
-                // });
-                // this.setModel(oModel, "studentModel");
-                // console.log(oData)
 
-                var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZTK_TUTORIAL_SERVICE_SRV/");
-                this.setModel(oModel);
+                this.setModel(models.createJSONModel(), "globalModel");
+
+               
+               
+
             }
         });
     }

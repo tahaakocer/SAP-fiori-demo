@@ -9,7 +9,7 @@
 >
     <Table
         id="idTable"
-        rows="{/studentSet}"
+        rows="{globalModel>/getAllStudents}"
         ariaLabelledBy="title"
         
     >
@@ -52,7 +52,7 @@
             <Column width="11rem">
                 <m:Label text="Student Id" />
                 <template>
-                    <m:Label text="{Id}" />
+                    <m:Label text="{globalModel>Id}" />
                 </template>
             </Column>
 
@@ -60,7 +60,7 @@
                 <m:Label text="Name" />
                 <template>
                     <m:Text
-                        text="{Name}"
+                        text="{globalModel>Name}"
                         wrapping="false"
                     />
                 </template>
@@ -68,14 +68,14 @@
             <Column width="11rem">
                 <m:Label text="Surname" />
                 <template>
-                    <m:Label text="{Surname}" />
+                    <m:Label text="{globalModel>Surname}" />
                 </template>
             </Column>
             <Column width="12rem">
                 <m:Label text="Lesson" />
                 <template>
                     <m:Label
-                        text="{path: 'LessonId',
+                        text="{path: 'globalModel>LessonId',
                         formatter: '.formatLesson'}"
                     />
                 </template>
@@ -83,7 +83,7 @@
             <Column width="11rem">
                 <m:Label text="Point" />
                 <template>
-                    <u:Currency value="{Point}" />
+                    <u:Currency value="{globalModel>Point}" />
                 </template>
             </Column>
             <Column width="11.8rem">
@@ -104,7 +104,7 @@
                 <template>
                     <c:Icon
                         src="{
-                            path: 'Approval',
+                            path: 'globalModel>Approval',
                             formatter: '.formatStatusIcon'
                         }"
                     />

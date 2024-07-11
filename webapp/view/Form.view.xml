@@ -49,26 +49,15 @@
                             <Select
                                 id="idLessonSelect"
                                 selectedKey="{lesson}"
+                                items="{
+                                    path: 'globalModel>/getAllDomains',
+                                    templateShareable: false
+                                }"
                             >
-                                <items>
-                                    <core:Item
-                                        text="PROGRAMMING"
-                                        key="1"
-                                    />
-                                    <core:Item
-                                        text="MATH"
-                                        key="2"
-                                    />
-                                    <core:Item
-                                        text="DATA STRUCTURES AND ALGORITHMS"
-                                        key="3"
-                                    />
-
-                                    <core:Item
-                                        text="STATISTICS"
-                                        key="4"
-                                    />
-                                </items>
+                                <core:Item
+                                    key="{globalModel>Lessonid}"
+                                    text="{globalModel>Lessonname}"
+                                />
                             </Select>
                         </f:fields>
                     </f:FormElement>

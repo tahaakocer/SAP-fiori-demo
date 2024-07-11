@@ -1,9 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
+    "sap/m/BusyIndicator"
 ], function (
     Controller,
-    MessageToast
+	MessageToast,
+	BusyIndicator
 ) {
     "use strict";
 
@@ -12,6 +14,19 @@ sap.ui.define([
          * @override
          */
         onInit: function () {
+
+            var oDataModel = this.getOwnerComponent().getModel("myOdata");
+            var globalModel = this.getOwnerComponent().getModel("globalModel");
+
+            oDataModel.read("/studentSet", {
+                success: function (oData) {
+                    globalModel.setProperty("/getAllStudents", oData.results);
+                    console.log(oData.results)
+                },
+                error: function (oError) {
+                    console.error("students data okunamadi");
+                }
+            })
 
         },
         formatStatusIcon: function (sStatus) {

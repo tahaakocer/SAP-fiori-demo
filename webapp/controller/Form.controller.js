@@ -1,23 +1,24 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/m/BusyIndicator"
+    "sap/m/BusyIndicator",
+    "com/solvia/demo/utils/Helper"
 
 
 ], function (
     Controller,
-    MessageToast,
-    BusyIndicator
+	MessageToast,
+	BusyIndicator,
+	Helper
 ) {
     "use strict";
 
     return Controller.extend("com.solvia.demo.controller.Form", {
-        _intId: 0,
+      
         /**
          * @override
          */
         onInit: function () {
-            this._intId = 1;
 
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
             var globalModel = this.getOwnerComponent().getModel("globalModel")
@@ -62,6 +63,7 @@ sap.ui.define([
                     console.error("öğrenci eklenemedi!" + data);
                 }
             });
+            Helper.refreshTable(this.getOwnerComponent());
 
         }
     });

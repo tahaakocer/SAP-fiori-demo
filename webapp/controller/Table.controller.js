@@ -1,11 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
-    "sap/ui/core/BusyIndicator"
+    "sap/ui/core/BusyIndicator",
+    "com/solvia/demo/utils/Helper"  // Yeni yardımcı modülü import edin
 ], function (
     Controller,
-	MessageToast,
-	BusyIndicator
+    MessageToast,
+    BusyIndicator,
+    Helper
 ) {
     "use strict";
 
@@ -13,32 +15,17 @@ sap.ui.define([
         /**
          * @override
          */
+
         onInit: function () {
-
-            var oDataModel = this.getOwnerComponent().getModel("myOdata");
-            var globalModel = this.getOwnerComponent().getModel("globalModel");
-
-            BusyIndicator.show();
-            oDataModel.read("/studentSet", {
-                success: function (oData) {
-                    BusyIndicator.hide();
-                    globalModel.setProperty("/getAllStudents", oData.results);
-                    console.log(oData.results)
-                },
-                error: function (oError) {
-                    BusyIndicator.hide();
-                    console.error("students data okunamadi");
-                    MessageToast.show("students data okunamadi");
-                }
-            })
-
+            Helper.refreshTable(this.getOwnerComponent());
         },
+
         formatStatusIcon: function (sStatus) {
             if (sStatus == "PENDING") {
                 return "sap-icon://pending";
             } else if (sStatus == "APPROVE") {
                 return "sap-icon://accept";
-            } else if(sStatus == "REJECT") {
+            } else if (sStatus == "REJECT") {
                 return "sap-icon://decline";
             }
         },
@@ -47,70 +34,62 @@ sap.ui.define([
             switch (sLesson) {
                 case "01":
                     return "PROGRAMMING";
-                    break;
                 case "02":
-                    return "MATH"
-                    break;
+                    return "MATH";
                 case "03":
-                    return "DATA STRUCTURES AND ALGORITHMS"
-                    break;
+                    return "DATA STRUCTURES AND ALGORITHMS";
                 case "04":
-                    return "STATISTICS"
-                    break;
-
+                    return "STATISTICS";
                 default:
-                    return "ERROR"
-                    break;
+                    return "ERROR";
             }
         },
 
         onButtonClearPress: function (oEvent) {
             this.byId("idTable").clearSelection();
         },
-        onDeleteSelectedButtonPress: function (oEvent) {
-            var oView = this.getView();
-            var oModel = oView.getModel("studentModel");
-            var oData = oModel.getData("studentData");
 
-            // Seçili öğrenciyi bul
-            var oTable = oView.byId("idTable");
+        onDeleteSelectedButtonPress: function (oEvent) {
+            var oTable = this.byId("idTable");
             var aSelectedIndices = oTable.getSelectedIndices();
 
             if (aSelectedIndices.length === 0) {
-                MessageToast.show("Lütfen silinecek bir öğrenci seçin.");
+                sap.m.MessageToast.show("Silmek için en az bir öğrenci seçmelisiniz!");
                 return;
             }
 
-            var aStudents = oData.students;
-
-            aSelectedIndices.sort(function (a, b) {
-                return b - a;
+            var aSelectedStudents = [];
+            aSelectedIndices.forEach(function (index) {
+                var oStudent = oTable.getContextByIndex(index).getObject();
+                aSelectedStudents.push(oStudent);
             });
+            this.deleteSelectedStudents(aSelectedStudents);
+            Helper.refreshTable(this.getOwnerComponent());
+        },
 
-            aSelectedIndices.forEach(function (iIndex) {
-                // diziden sil
-                aStudents.splice(iIndex, 1);
+        deleteSelectedStudents: function (aSelectedStudents) {
+            var oDataModel = this.getOwnerComponent().getModel("myOdata");
+            aSelectedStudents.forEach(function (oStudent) {
+                var sStudentPath = `/studentSet(Id='${oStudent.Id}',LessonId='${oStudent.LessonId}')`;
+                oDataModel.remove(sStudentPath, {
+                    success: function () {
+                        MessageToast.show("Seçili öğrenci(ler) silindi.");
+                    },
+                    error: function () {
+                        sap.m.MessageToast.show("Öğrenci silinirken bir hata oluştu.");
+                    }
+                });
             });
-
-            oData.students = aStudents;
-            //güncelle
-            oModel.refresh();
-
-            MessageToast.show("Seçili öğrenci(ler) silindi.");
-
-            console.log(oModel);
         },
 
         onUpdateSelectedButtonPress: function (oEvent) {
-            //Burası nasıl çalıştı anlamadım
             var oView = this.getView();
             var oModel = oView.getModel("studentModel");
 
-            // Seçili öğrenciyi bul
             var oTable = oView.byId("idTable");
             var aSelectedIndices = oTable.getSelectedIndices();
 
-            if (aSelectedIndices.length === 0 && aSelectedIndices.length > 1) {
+            if (aSelectedIndices.length === 0 || aSelectedIndices.length > 1) {
                 MessageToast.show("Lütfen güncellenecek bir öğrenci seçin.");
                 return;
             }
@@ -124,33 +103,22 @@ sap.ui.define([
                 path: oContext.getPath(),
                 model: "studentModel"
             });
-            this._oDialog.open()
-
+            this._oDialog.open();
         },
 
         onSaveButtonPress: function () {
-            var oView = this.getView();
-            var oModel = oView.getModel("studentModel");
-
-            var oData = oModel.getData();
-            oModel.updateBindings(true);
-
-            this._oDialog.close();
-
             MessageToast.show("Öğrenci bilgileri başarıyla güncellendi.");
-
+            Helper.refreshTable(this.getOwnerComponent());
         },
 
         onCancelButtonPress: function (oEvent) {
             this._oDialog.close();
             console.log(this.getView().getModel("studentModel"));
         },
-        onShowDetailsButtonPress: function (oEvent) {
 
+        onShowDetailsButtonPress: function (oEvent) {
             const oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("detail");
         }
-
     });
-
 });

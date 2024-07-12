@@ -37,7 +37,7 @@ sap.ui.define([
             }
             )
         },
-
+    
         onSaveButtonPress: function (oEvent) {
             var oView = this.getView();
             var iName = oView.byId("idNameInput");
@@ -85,19 +85,31 @@ sap.ui.define([
                 Point: sPoint,
                 Approval: "PENDING"
             };
-
-            this.getOwnerComponent().getModel("myOdata").create("/studentSet", oAddEmpData, {
-                method: "POST",
-                success: function (data) {
-                    MessageToast.show("Öğrenci başarıyla eklendi.");
-                },
-                error: function (data) {
-                    MessageToast.show("Öğrenci eklenemedi!");
-                    console.error("öğrenci eklenemedi!");
+            function validationForm(oEmpData) {
+                for (var key in oEmpData) {
+                    if (oEmpData[key] == "" || oEmpData[key] == null) {
+                        return false;
+                    }
                 }
-            });
-            Helper.refreshTable(this.getOwnerComponent());
-
+                return true;
+            }
+            if (validationForm(oAddEmpData)) {
+                this.getOwnerComponent().getModel("myOdata").create("/studentSet", oAddEmpData, {
+                    method: "POST",
+                    success: function (data) {
+                        MessageToast.show("Öğrenci başarıyla eklendi.");
+                    },
+                    error: function (data) {
+                        MessageToast.show("Öğrenci eklenemedi!");
+                        console.error("öğrenci eklenemedi!");
+                    }
+                });
+                Helper.refreshTable(this.getOwnerComponent());
+            }
+            else {
+                MessageToast.show("Boş alan bırakmayın");
+            }
+            
         }
     });
 });

@@ -13,64 +13,52 @@
                 <Label text="Name" />
                 <Input
                     id="idNameInput"
-                    value="{studentModel>name}"
+                    value="{globalModel>/updateList/name}"
                 />
                 <Label text="Surname" />
                 <Input
                     id="idSurnameInput"
-                    value="{studentModel>surname}"
+                    value="{globalModel>/updateList/surname}"
                 />
                 <Label text="Lesson" />
                 <Select
                     id="idLessonSelect"
-                    selectedKey="{studentModel>lesson}"
+                    selectedKey="{globalModel>/updateList/lesson}"
+                    items="{
+                        path: 'globalModel>/getAllDomains',
+                        key: 'lesson'
+                    }"
                 >
-                    <items>
-                        <c:Item
-                            text="PROGRAMMING"
-                            key="1"
-                        />
-                        <c:Item
-                            text="MATH"
-                            key="2"
-                        />
-                        <c:Item
-                            text="DATA STRUCTURES AND ALGORITHMS"
-                            key="3"
-                        />
-
-                        <c:Item
-                            text="STATISTICS"
-                            key="4"
-                        />
-                    </items>
+                    <c:Item
+                        key="{globalModel>Lessonid}"
+                        text="{globalModel>Lessonname}"
+                    />
                 </Select>
 
                 <Label text="Point" />
                 <Input
                     id="idPointInput"
-                    value="{studentModel>point}"
+                    value="{globalModel>/updateList/point}"
                     type="Number"
                 />
                 <Label text="Approval" />
                 <Select
                     id="idApprovalSelect"
-                    selectedKey="{studentModel>approval}"
+                    selectedKey="{globalModel>/updateList/approval}"
                 >
                     <items>
                         <c:Item
                             text="Accept"
-                            key="true"
+                            key="ACCEPT"
                         />
                         <c:Item
                             text="Pending"
-                            key="null"
+                            key="PENDING"
                         />
                         <c:Item
                             text="Reject"
-                            key="false"
+                            key="REJECT"
                         />
-
                     </items>
                 </Select>
             </VBox>

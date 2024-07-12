@@ -49,6 +49,7 @@
                     <f:FormElement label="Lesson">
                         <f:fields>
                             <Select
+                                required="true"
                                 id="idGetAllDomainsSelect"
                                 selectedKey="{lesson}"
                                 items="{

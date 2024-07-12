@@ -11,6 +11,7 @@
         id="idTable"
         rows="{globalModel>/getAllStudents}"
         ariaLabelledBy="title"
+        selectionMode="Single"
         
     >
         <extension>

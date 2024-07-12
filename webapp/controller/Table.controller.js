@@ -2,12 +2,14 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "sap/ui/core/BusyIndicator",
-    "com/solvia/demo/utils/Helper"  // Yeni yardımcı modülü import edin
+    "com/solvia/demo/utils/Helper",
+    "sap/ui/core/Fragment"
 ], function (
     Controller,
     MessageToast,
     BusyIndicator,
-    Helper
+    Helper,
+    Fragment
 ) {
     "use strict";
 
@@ -69,7 +71,7 @@ sap.ui.define([
 
         deleteSelectedStudents: function (aSelectedStudents) {
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
-            aSelectedStudents.forEach(function (oStudent) {
+            aSelectedStudents.forEach(oStudent => {
                 var sStudentPath = `/studentSet(Id='${oStudent.Id}',LessonId='${oStudent.LessonId}')`;
                 oDataModel.remove(sStudentPath, {
                     success: function () {
@@ -77,33 +79,47 @@ sap.ui.define([
                     },
                     error: function () {
                         sap.m.MessageToast.show("Öğrenci silinirken bir hata oluştu.");
+                        console.log("hata");
                     }
                 });
             });
+            this.byId("idTable").clearSelection();
+
         },
 
         onUpdateSelectedButtonPress: function (oEvent) {
             var oView = this.getView();
-            var oModel = oView.getModel("studentModel");
-
             var oTable = oView.byId("idTable");
             var aSelectedIndices = oTable.getSelectedIndices();
 
-            if (aSelectedIndices.length === 0 || aSelectedIndices.length > 1) {
+            if (aSelectedIndices.length !== 1) {
                 MessageToast.show("Lütfen güncellenecek bir öğrenci seçin.");
                 return;
             }
+
             var oContext = oTable.getContextByIndex(aSelectedIndices[0]);
+            var oData = oContext.getObject();
+
+            this.getOwnerComponent().getModel("globalModel").setProperty("/updateList", {
+                name: oData.Name,
+                surname: oData.Surname,
+                lesson: oData.LessonId,
+                point: oData.Point,
+                approval: oData.Approval
+            });
 
             if (!this._oDialog) {
-                this._oDialog = sap.ui.xmlfragment("com.solvia.demo.view.StudentEdit", this);
-                this.getView().addDependent(this._oDialog);
+                Fragment.load({
+                    name: "com.solvia.demo.view.StudentEdit",
+                    controller: this
+                }).then(function (oDialog) {
+                    this._oDialog = oDialog;
+                    oView.addDependent(this._oDialog);
+                    this._oDialog.open();
+                }.bind(this));
+            } else {
+                this._oDialog.open();
             }
-            this._oDialog.bindElement({
-                path: oContext.getPath(),
-                model: "studentModel"
-            });
-            this._oDialog.open();
         },
 
         onSaveButtonPress: function () {

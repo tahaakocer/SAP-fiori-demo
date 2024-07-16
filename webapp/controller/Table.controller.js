@@ -126,9 +126,16 @@ sap.ui.define([
         },
 
         onSaveButtonPress: function () {
+
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
-            
+            var globalModel = this.getOwnerComponent().getModel("globalModel");
+
             // sap.ui.getCore().byId(this.createId("tv")).setText("Set in Controller");
+
+            var oTable = this.byId("idTable");
+            var aSelectedIndices = oTable.getSelectedIndices();
+            var oContext = oTable.getContextByIndex(aSelectedIndices[0]);
+            var oData = oContext.getObject();
 
             var sId = sap.ui.getCore().byId('idIdInput').getValue();
             var sName = sap.ui.getCore().byId('idNameInput').getValue();
@@ -136,7 +143,7 @@ sap.ui.define([
             var sLesson = sap.ui.getCore().byId('idGetAllDomainsSelect').getSelectedKey();
             var sPoint = Number(sap.ui.getCore().byId('idPointInput').getValue());
             var sApproval = sap.ui.getCore().byId('idApprovalSelect').getSelectedKey();
-            
+
             var oEmpData = {
                 Id: sId,
                 LessonId: sLesson,
@@ -146,12 +153,12 @@ sap.ui.define([
                 Approval: sApproval
             };
             console.log(oEmpData);
-            
-            var path = `/studentSet(Id='${sId}',LessonId='${sLesson}')`;
+
+            var path = `/studentSet(Id='${oData.Id}',LessonId='${oData.LessonId}')`;
             console.log(path);
-            oDataModel.update(path, oEmpData,{
+            oDataModel.update(path, oEmpData, {
                 method: "PUT",
-                success:function() {
+                success: function () {
                     MessageToast.show("Öğrenci başarıyla güncellendi.");
                 },
                 error: function () {
@@ -171,7 +178,7 @@ sap.ui.define([
             oRouter.navTo("detail");
         },
 
-		onTableRowSelectionChange: function(oEvent) {
+        onTableRowSelectionChange: function (oEvent) {
             // Seçili öğeleri kontrol et
             var oTable = this.byId('idTable');
 
@@ -181,6 +188,6 @@ sap.ui.define([
             var bEnabled = selected !== -1;
             this.byId('idUpdateSelectedButton').setEnabled(bEnabled);
             this.byId("idDeleteSelectedButton").setEnabled(bEnabled);
-		}
+        }
     });
 });

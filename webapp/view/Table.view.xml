@@ -12,7 +12,7 @@
         rows="{globalModel>/getAllStudents}"
         ariaLabelledBy="title"
         selectionMode="Single"
-        
+        rowSelectionChange="onTableRowSelectionChange"
     >
         <extension>
             <m:OverflowToolbar style="Clear">
@@ -22,15 +22,9 @@
                     icon="sap-icon://decline"
                     tooltip="Clear Selection"
                     press=".onButtonClearPress"
-        
                 />
                 <m:Button
-                    icon="sap-icon://save"
-                    tooltip="Save"
-                    text="Save"
-                    type="Success"
-                />
-                <m:Button
+                    id="idUpdateSelectedButton"
                     icon="sap-icon://user-settings"
                     tooltip="Update Selection"
                     text="Update Selected"
@@ -39,12 +33,12 @@
                 />
 
                 <m:Button
+                    id="idDeleteSelectedButton"
                     icon="sap-icon://delete"
                     tooltip="Delete Selected Student"
                     press=".onDeleteSelectedButtonPress"
                     type="Negative"
                     text="Delete Selected"
-
                 />
             </m:OverflowToolbar>
         </extension>

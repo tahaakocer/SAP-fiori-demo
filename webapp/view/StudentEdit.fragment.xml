@@ -10,6 +10,13 @@
     >
         <content>
             <VBox>
+                 <Label text="Id" />
+                <Input
+                    id="idIdInput"
+                    value="{globalModel>/updateList/id}"
+                    editable="false"
+                    enabled="false"
+                />
                 <Label text="Name" />
                 <Input
                     id="idNameInput"
@@ -22,7 +29,7 @@
                 />
                 <Label text="Lesson" />
                 <Select
-                    id="idLessonSelect"
+                    id="idGetAllDomainsSelect"
                     selectedKey="{globalModel>/updateList/lesson}"
                     items="{
                         path: 'globalModel>/getAllDomains',

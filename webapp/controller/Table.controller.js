@@ -19,6 +19,8 @@ sap.ui.define([
          */
 
         onInit: function () {
+            this.byId("idUpdateSelectedButton").setEnabled(false);
+            this.byId("idDeleteSelectedButton").setEnabled(false);
             Helper.refreshTable(this.getOwnerComponent());
         },
 
@@ -101,6 +103,7 @@ sap.ui.define([
             var oData = oContext.getObject();
 
             this.getOwnerComponent().getModel("globalModel").setProperty("/updateList", {
+                id: oData.Id,
                 name: oData.Name,
                 surname: oData.Surname,
                 lesson: oData.LessonId,
@@ -123,7 +126,38 @@ sap.ui.define([
         },
 
         onSaveButtonPress: function () {
-            MessageToast.show("Öğrenci bilgileri başarıyla güncellendi.");
+            var oDataModel = this.getOwnerComponent().getModel("myOdata");
+            
+            // sap.ui.getCore().byId(this.createId("tv")).setText("Set in Controller");
+
+            var sId = sap.ui.getCore().byId('idIdInput').getValue();
+            var sName = sap.ui.getCore().byId('idNameInput').getValue();
+            var sSurname = sap.ui.getCore().byId('idSurnameInput').getValue();
+            var sLesson = sap.ui.getCore().byId('idGetAllDomainsSelect').getSelectedKey();
+            var sPoint = Number(sap.ui.getCore().byId('idPointInput').getValue());
+            var sApproval = sap.ui.getCore().byId('idApprovalSelect').getSelectedKey();
+            
+            var oEmpData = {
+                Id: sId,
+                LessonId: sLesson,
+                Name: sName,
+                Surname: sSurname,
+                Point: sPoint,
+                Approval: sApproval
+            };
+            console.log(oEmpData);
+            
+            var path = `/studentSet(Id='${sId}',LessonId='${sLesson}')`;
+            console.log(path);
+            oDataModel.update(path, oEmpData,{
+                method: "PUT",
+                success:function() {
+                    MessageToast.show("Öğrenci başarıyla güncellendi.");
+                },
+                error: function () {
+                    MessageToast.show("Öğrenci güncellenirken bir hata oluştu.");
+                }
+            });
             Helper.refreshTable(this.getOwnerComponent());
         },
 
@@ -135,6 +169,18 @@ sap.ui.define([
         onShowDetailsButtonPress: function (oEvent) {
             const oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("detail");
-        }
+        },
+
+		onTableRowSelectionChange: function(oEvent) {
+            // Seçili öğeleri kontrol et
+            var oTable = this.byId('idTable');
+
+            var selected = oTable.getSelectedIndices();
+
+            // Butonları güncelle
+            var bEnabled = selected !== -1;
+            this.byId('idUpdateSelectedButton').setEnabled(bEnabled);
+            this.byId("idDeleteSelectedButton").setEnabled(bEnabled);
+		}
     });
 });

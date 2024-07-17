@@ -6,10 +6,19 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <Page title="Detail Page">
+    <Page title="Detail Page"
+        >
         <content>
             <VBox class="centered-container">
                 <VBox class="centered-box">
+                    <HBox class="custom-hbox">
+                        <Button
+                            type="Back"
+                            text="Geri Don"
+                            class="back-button"
+                            press="onGeriDonButtonPress"
+                        />
+                    </HBox>
                     <HBox
                         class="custom-hbox"
                         justifyContent="SpaceBetween"
@@ -19,6 +28,7 @@
                             text="Student Id"
                         />
                         <Input
+                            id="idIdInput"
                             class="inputs"
                             editable="false"
                             value="{globalModel>/details/Id}"
@@ -95,6 +105,7 @@
                             text="Approval"
                         />
                         <Input
+                        id="idApprovalInput"
                             class="inputs"
                             editable="false"
                             value="{globalModel>/details/Approval}"
@@ -111,6 +122,7 @@
                                 text="Accept"
                                 type="Success"
                                 class="detail-button"
+                                press="onAcceptButtonPress"
                             />
                         </VBox>
                         <VBox>
@@ -119,6 +131,7 @@
                                 text="Pending"
                                 type="Neutral"
                                 class="detail-button"
+                                press="onPendingButtonPress"
                             />
                         </VBox>
                         <VBox>
@@ -127,6 +140,7 @@
                                 text="Reject"
                                 type="Negative"
                                 class="detail-button"
+                                press="onRejectButtonPress"
                             />
                         </VBox>
                     </HBox>

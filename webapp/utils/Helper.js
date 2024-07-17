@@ -21,6 +21,7 @@ sap.ui.define([
                     MessageToast.show("students data okunamadi");
                 }
             });
+            
         },
         formatLesson: function (sLesson) {
             switch (sLesson) {

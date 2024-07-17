@@ -21,6 +21,20 @@ sap.ui.define([
                     MessageToast.show("students data okunamadi");
                 }
             });
-        }
+        },
+        formatLesson: function (sLesson) {
+            switch (sLesson) {
+                case "01":
+                    return "PROGRAMMING";
+                case "02":
+                    return "MATH";
+                case "03":
+                    return "DATA STRUCTURES AND ALGORITHMS";
+                case "04":
+                    return "STATISTICS";
+                default:
+                    return "ERROR";
+            }
+        },
     };
 });

@@ -70,8 +70,10 @@
                 <m:Label text="Lesson" />
                 <template>
                     <m:Label
-                        text="{path: 'globalModel>LessonId',
-                        formatter: '.formatLesson'}"
+                        text="{
+                        path: 'globalModel>LessonId',
+                        formatter: '.formatLesson'
+                        }"
                     />
                 </template>
             </Column>

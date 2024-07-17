@@ -27,13 +27,13 @@ sap.ui.define([
         formatStatusIcon: function (sStatus) {
             if (sStatus == "PENDING") {
                 return "sap-icon://pending";
-            } else if (sStatus == "APPROVE") {
+            } else if (sStatus == "ACCEPT") {
                 return "sap-icon://accept";
             } else if (sStatus == "REJECT") {
                 return "sap-icon://decline";
             }
         },
-
+        // formatter: Helper.formatLesson,
         formatLesson: function (sLesson) {
             switch (sLesson) {
                 case "01":
@@ -61,7 +61,6 @@ sap.ui.define([
                 sap.m.MessageToast.show("Silmek için en az bir öğrenci seçmelisiniz!");
                 return;
             }
-
             var aSelectedStudents = [];
             aSelectedIndices.forEach(function (index) {
                 var oStudent = oTable.getContextByIndex(index).getObject();
@@ -128,10 +127,7 @@ sap.ui.define([
         onSaveButtonPress: function () {
 
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
-            var globalModel = this.getOwnerComponent().getModel("globalModel");
-
-            // sap.ui.getCore().byId(this.createId("tv")).setText("Set in Controller");
-
+            
             var oTable = this.byId("idTable");
             var aSelectedIndices = oTable.getSelectedIndices();
             var oContext = oTable.getContextByIndex(aSelectedIndices[0]);
@@ -145,23 +141,22 @@ sap.ui.define([
             var sApproval = sap.ui.getCore().byId('idApprovalSelect').getSelectedKey();
 
             var oEmpData = {
-                Id: sId,
                 LessonId: sLesson,
                 Name: sName,
                 Surname: sSurname,
                 Point: sPoint,
                 Approval: sApproval
             };
-            console.log(oEmpData);
+            console.log(oEmpData); 
 
             var path = `/studentSet(Id='${oData.Id}',LessonId='${oData.LessonId}')`;
             console.log(path);
             oDataModel.update(path, oEmpData, {
                 method: "PUT",
-                success: function () {
+                success: function (data) {
                     MessageToast.show("Öğrenci başarıyla güncellendi.");
                 },
-                error: function () {
+                error: function (data) {
                     MessageToast.show("Öğrenci güncellenirken bir hata oluştu.");
                 }
             });
@@ -174,6 +169,23 @@ sap.ui.define([
         },
 
         onShowDetailsButtonPress: function (oEvent) {
+            var oDataModel = this.getOwnerComponent().getModel("myOdata");
+            var globalModel = this.getOwnerComponent().getModel("globalModel");
+            
+            var oButton= oEvent.getSource();
+            var oBindingContext = oButton.getBindingContext("globalModel");
+            var oData = oBindingContext.getObject();
+            console.log(oData);
+
+            globalModel.setProperty("/details",{
+                Id: oData.Id,
+                Name: oData.Name,
+                Surname: oData.Surname,
+                LessonId: oData.LessonId,
+                Point: oData.Point,
+                Approval: oData.Approval
+            })
+
             const oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("detail");
         },

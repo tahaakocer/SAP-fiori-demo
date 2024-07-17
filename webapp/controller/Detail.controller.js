@@ -7,8 +7,13 @@ sap.ui.define(
 
         return Controller.extend("com.solvia.demo.controller.Detail", {
             onInit: function () {
-                console.log("gitti")
-            }
+                var globalModel = this.getOwnerComponent().getModel("globalModel");
+                console.log(globalModel);
+            },
+
+
+
+
         });
     }
 );

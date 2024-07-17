@@ -7,6 +7,128 @@
     busyIndicatorDelay="0"
 >
     <Page title="Detail Page">
-    
+        <content>
+            <VBox class="centered-container">
+                <VBox class="centered-box">
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Student Id"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/Id}"
+                        />
+                    </HBox>
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Name"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/Name}"
+                        />
+                    </HBox>
+
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Surname"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/Surname}"
+                        />
+                    </HBox>
+
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Lesson"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/LessonId}"
+                        />
+                    </HBox>
+
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Point"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/Point}"
+                        />
+                    </HBox>
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceBetween"
+                    >
+                        <Label
+                            class="custom-label"
+                            text="Approval"
+                        />
+                        <Input
+                            class="inputs"
+                            editable="false"
+                            value="{globalModel>/details/Approval}"
+                        />
+                    </HBox>
+
+                    <HBox
+                        class="custom-hbox"
+                        justifyContent="SpaceAround"
+                    >
+                        <VBox>
+                            <Button
+                                icon="sap-icon://accept"
+                                text="Accept"
+                                type="Success"
+                                class="detail-button"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Button
+                                icon="sap-icon://pending"
+                                text="Pending"
+                                type="Neutral"
+                                class="detail-button"
+                            />
+                        </VBox>
+                        <VBox>
+                            <Button
+                                icon="sap-icon://decline"
+                                text="Reject"
+                                type="Negative"
+                                class="detail-button"
+                            />
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>

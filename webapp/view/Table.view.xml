@@ -72,7 +72,7 @@
                     <m:Label
                         text="{
                         path: 'globalModel>LessonId',
-                        formatter: '.formatLesson'
+                        formatter: '.Helper.formatLesson'
                         }"
                     />
                 </template>
@@ -103,6 +103,7 @@
                         src="{
                             path: 'globalModel>Approval',
                             formatter: '.formatStatusIcon'
+                
                         }"
                     />
                 </template>

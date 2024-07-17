@@ -65,7 +65,10 @@
                         <Input
                             class="inputs"
                             editable="false"
-                            value="{globalModel>/details/LessonId}"
+                            value="{
+                        path: 'globalModel>/details/LessonId',
+                        formatter: '.Helper.formatLesson'
+                        }"
                         />
                     </HBox>
 

@@ -17,13 +17,14 @@ sap.ui.define([
         /**
          * @override
          */
+        Helper: Helper,
+
 
         onInit: function () {
             this.byId("idUpdateSelectedButton").setEnabled(false);
             this.byId("idDeleteSelectedButton").setEnabled(false);
             Helper.refreshTable(this.getOwnerComponent());
         },
-
         formatStatusIcon: function (sStatus) {
             if (sStatus == "PENDING") {
                 return "sap-icon://pending";
@@ -33,22 +34,7 @@ sap.ui.define([
                 return "sap-icon://decline";
             }
         },
-        // formatter: Helper.formatLesson,
-        formatLesson: function (sLesson) {
-            switch (sLesson) {
-                case "01":
-                    return "PROGRAMMING";
-                case "02":
-                    return "MATH";
-                case "03":
-                    return "DATA STRUCTURES AND ALGORITHMS";
-                case "04":
-                    return "STATISTICS";
-                default:
-                    return "ERROR";
-            }
-        },
-
+       
         onButtonClearPress: function (oEvent) {
             this.byId("idTable").clearSelection();
         },
@@ -69,7 +55,6 @@ sap.ui.define([
             this.deleteSelectedStudents(aSelectedStudents);
             Helper.refreshTable(this.getOwnerComponent());
         },
-
         deleteSelectedStudents: function (aSelectedStudents) {
             var oDataModel = this.getOwnerComponent().getModel("myOdata");
             aSelectedStudents.forEach(oStudent => {
@@ -85,9 +70,7 @@ sap.ui.define([
                 });
             });
             this.byId("idTable").clearSelection();
-
         },
-
         onUpdateSelectedButtonPress: function (oEvent) {
             var oView = this.getView();
             var oTable = oView.byId("idTable");
@@ -161,6 +144,8 @@ sap.ui.define([
                 }
             });
             Helper.refreshTable(this.getOwnerComponent());
+            this.byId("idTable").clearSelection();
+            this._oDialog.close();
         },
 
         onCancelButtonPress: function (oEvent) {

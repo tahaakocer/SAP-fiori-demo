@@ -131,21 +131,27 @@ sap.ui.define([
                 Approval: sApproval
             };
             console.log(oEmpData); 
-
             var path = `/studentSet(Id='${oData.Id}',LessonId='${oData.LessonId}')`;
             console.log(path);
-            oDataModel.update(path, oEmpData, {
-                method: "PUT",
-                success: function (data) {
-                    MessageToast.show("Öğrenci başarıyla güncellendi.");
-                },
-                error: function (data) {
-                    MessageToast.show("Öğrenci güncellenirken bir hata oluştu.");
-                }
-            });
-            Helper.refreshTable(this.getOwnerComponent());
-            this.byId("idTable").clearSelection();
-            this._oDialog.close();
+
+            if(Helper.validationForm(oEmpData)){
+                oDataModel.update(path, oEmpData, {
+                    method: "PUT",
+                    success: function (data) {
+                        MessageToast.show("Öğrenci başarıyla güncellendi.");
+                    },
+                    error: function (data) {
+                        MessageToast.show("Öğrenci güncellenirken bir hata oluştu.");
+                    }
+                });
+                Helper.refreshTable(this.getOwnerComponent());
+                this.byId("idTable").clearSelection();
+                this._oDialog.close();
+            }else {
+                MessageToast.show("Boş alan bırakmayınız!")
+            }
+           
+            
         },
 
         onCancelButtonPress: function (oEvent) {

@@ -21,7 +21,7 @@ sap.ui.define([
                     MessageToast.show("students data okunamadi");
                 }
             });
-            
+
         },
         formatLesson: function (sLesson) {
             switch (sLesson) {
@@ -37,5 +37,16 @@ sap.ui.define([
                     return "ERROR";
             }
         },
+        validationForm: function (oEmpData) {
+            for (var key in oEmpData) {
+                if (oEmpData[key] == "" || oEmpData[key] == null) {
+                    return false;
+                }
+            }
+            if (oEmpData.Point < 0 || oEmpData.Point > 100) {
+                return false;
+            }
+            return true;
+        }
     };
 });

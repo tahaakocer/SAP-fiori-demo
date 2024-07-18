@@ -74,7 +74,11 @@ sap.ui.define([
             if (isNaN(sPoint) || sPoint === null || sPoint === "") {
                 iPoint.setValueState(ValueState.Error);
                 iPoint.setValueStateText("Bu alan boş bırakılamaz!");
-            } else {
+            } else if(sPoint < 0 || sPoint > 100){
+                iPoint.setValueState(ValueState.Warning);
+                iPoint.setValueStateText("Geçerli bir sayı girmelisiniz. (0-100)");
+            }
+            else {
                 iPoint.setValueState(ValueState.None);
             }
 
@@ -85,15 +89,8 @@ sap.ui.define([
                 Point: sPoint,
                 Approval: "PENDING"
             };
-            function validationForm(oEmpData) {
-                for (var key in oEmpData) {
-                    if (oEmpData[key] == "" || oEmpData[key] == null) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            if (validationForm(oAddEmpData)) {
+
+            if (Helper.validationForm(oAddEmpData)) {
                 this.getOwnerComponent().getModel("myOdata").create("/studentSet", oAddEmpData, {
                     method: "POST",
                     success: function (data) {
@@ -107,7 +104,7 @@ sap.ui.define([
                 Helper.refreshTable(this.getOwnerComponent());
             }
             else {
-                MessageToast.show("Boş alan bırakmayın");
+                MessageToast.show("Öğrenci Eklenemedi!");
             }
             
         }

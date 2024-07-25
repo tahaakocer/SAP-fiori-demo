@@ -7,7 +7,6 @@
 |**Generation Platform**<br>Visual Studio Code|
 |**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>http://172.16.0.11:50000/sap/opu/odata/sap/ZTK_TUTORIAL_SERVICE_SRV
 |**Module Name**<br>demo|
 |**Application Title**<br>Fiori Demo|
 |**Namespace**<br>com.solvia|
